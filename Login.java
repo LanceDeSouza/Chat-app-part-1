@@ -66,4 +66,54 @@ public class Login {
 		String regex = "^\\+27\\d{9}$";
 		return Pattern.matches(regex, number);
 	}
+/*================Registering the user================
+ * Checking that all of the conditions for registration are met
+*/
+	public String registerUser (String userName, String password, String cellPhoneNum, String firstName, String lastName) {
+		
+//Checking userName
+	if (!checkUserName(userName)) {
+		return "Your username is not correctly formated, please ensure that it conatains an underscore and no more then 5 characters long.";
+	}
+	
+//Checking password
+	if (!checkPassword(password)) {
+		return "Your password is not correctly formated, please ensure that it is at least 8 characters long, contais a capital letter, contains a number and also a special character.";
+	}
+	
+//Checking cellPhoneNum
+	if (!checkCellPhoneNum(cellPhoneNum)) {
+		return "Your cell phone number is not correctly formated, please ensure that it contains the internatiol country code +27 followed by 9 other digits.";
+	}
+	
+//Save the users details
+	this.userName = userName;
+	this.password = password;
+	this.cellPhoneNum = cellPhoneNum;
+	this.firstName = firstName;
+	this.lastName = lastName;
+	
+	return "You have successfully registerd";
+	}
+	
+/*================Login================
+ * Checking that the login information of the user is correct 
+*/
+	public boolean loginUser(String userName, String password) {
+		return  this.userName != null &&
+				this.password != null &&
+				this.userName.equals(userName) &&
+				this.password.equals(password);
+	}
+
+/*================Login status================
+ *Checking that the login information of the user is correct 
+*/
+	public String returnLoginStatus(boolean loginSuccessfull) {
+		if (loginSuccessfull) {
+			return "Welcome " + firstName + " " + lastName + " you have successfully logged into your account.";
+		} else {
+			return "Your password or username is incorrect please try again.";
+		}
+	}
 }
