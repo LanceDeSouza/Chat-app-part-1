@@ -31,10 +31,30 @@ public class Login {
 		this.lastName = lastName;
 	}
 
-    /*================userName Validation================
+/*================userName Validation================
  * Checking for the userName conditions
 */
 	public boolean checkUserName(String userName) {
 		return userName.contains("_") && userName.length() <= 5;
+	}
+
+/*================password Validation================
+ * Checking for the password conditions
+ * return true if valid, return false if otherwise
+*/
+	public boolean checkPassword(String password) {
+		if (password.length() < 8) return false;
+	
+	boolean hasCapital = false;
+	boolean hasNumber = false;
+	boolean hasSpecailCharacter = false;
+	
+	for (char i : password.toCharArray()) {
+		if (Character.isUpperCase(i)) hasCapital = true;
+		if (Character.isDigit(i)) hasNumber = true;
+		if (!Character.isLetterOrDigit(i)) hasSpecailCharacter = true;
+	}
+	
+	return hasCapital && hasNumber && hasSpecailCharacter;
 	}
 }
