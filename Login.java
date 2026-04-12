@@ -57,4 +57,13 @@ public class Login {
 	
 	return hasCapital && hasNumber && hasSpecailCharacter;
 	}
+
+/*================cellPhoneNum Validation================
+ * Checking for the cellPhoneNum conditions
+ * SA cell phone number format is +27 followed by 9 digits adding up to a total of 12 chars including the + 
+*/
+	public boolean checkCellPhoneNum(String number) {
+		String regex = "^\\+27\\d{9}$";
+		return Pattern.matches(regex, number);
+	}
 }
