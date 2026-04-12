@@ -30,4 +30,11 @@ public class Login {
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
+
+    /*================userName Validation================
+ * Checking for the userName conditions
+*/
+	public boolean checkUserName(String userName) {
+		return userName.contains("_") && userName.length() <= 5;
+	}
 }
