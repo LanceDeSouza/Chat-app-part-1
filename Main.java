@@ -66,7 +66,8 @@ public class Main {
 			loggedIn = true;
 	
 		}
-			userInput.close();
+			
 	}
+	userInput.close();
 	}
 }
