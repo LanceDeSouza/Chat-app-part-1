@@ -116,4 +116,11 @@ public class Login {
 			return "Your password or username is incorrect please try again.";
 		}
 	}
+
+//Getters for the purpose of testing
+	public String getUserName() { return userName; }
+	public String getPassword() { return password; }
+	public String getCellPhoneNum() { return cellPhoneNum; }
+	public String getFirstName() { return firstName; }
+	public String getLastName() { return lastName; }
 }
