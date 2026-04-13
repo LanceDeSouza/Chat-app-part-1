@@ -1,0 +1,5 @@
+{
+  "editor.parameterHints.enabled": false,
+  "editor.inlayHints.enabled": false,
+  "java.inlayHints.parameterNames.enabled": "none"
+}
