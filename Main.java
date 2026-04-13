@@ -12,6 +12,7 @@ public class Main {
 	String firstName, lastName, userName, password, cellPhoneNum;
 	boolean allInformationIsValid = false;
 		
+//============Registration loop============
 	while (!allInformationIsValid) {
 		System.out.println("============Registration============");
 		
@@ -30,7 +31,10 @@ public class Main {
 		System.out.print("Please enter your cell phone number (+27...): ");
 		cellPhoneNum = userInput.nextLine();
 
-//Checks all of the fields
+/*
+ *Checks all of the fields
+ *If all the information is valid then the user will be registered, if not they will be promted with the errors
+*/
 		boolean userNameOk = system.checkUserName(userName);
 		boolean userPawwordOk = system.checkPassword(password);
 		boolean userCellPhoneNumOk = system.checkCellPhoneNum(cellPhoneNum);
@@ -49,7 +53,8 @@ public class Main {
 	
 //============Login loop============
 	boolean loggedIn = false;
-	
+
+//This loop will continue until the user has successfully logged in
 	while (!loggedIn) {
 		System.out.println("============Login============");
 		
@@ -62,12 +67,13 @@ public class Main {
 		boolean loginSuccessfull = system.loginUser(loginUser, loginPassed);
 		System.out.println(system.returnLoginStatus(loginSuccessfull));
 		
+//If the login is successful then the user will be logged in and the loop will end
 		if (loginSuccessfull) {
 			loggedIn = true;
-	
 		}
 			
 	}
+//Close the scanner
 	userInput.close();
 	}
 }

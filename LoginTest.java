@@ -61,6 +61,8 @@ public class LoginTest {
 
 /*================Assert equals Tests (Assert true/false)================
  * This tests the full registration flow
+ * If the registration is successful then the success message will be returned, if not then the error message will be returned
+ * This is done for each of the fields as well as the login status
 */
 
 @Test
