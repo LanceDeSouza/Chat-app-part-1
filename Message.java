@@ -134,8 +134,62 @@ public class Message {
         return numMessagesSent;
     }
 
+/*================generateMessageID()================
+ * Generates a random ten digit number for the messageID
+*/
+    public String generateMessageID() {
+        Random random = new Random();
+        StringBuilder id = new StringBuilder();
+        for (int i = 0; i < 10; i++) {
+            id.append(random.nextInt(10));
+        }
+        return id.toString();
+    }
 
+/*================storeMessage()================
+ * Stores all the messages in a JSON file
+*/
+    public void storeMessage(String filename) {
+        JSONArray jsonArray = new JSONArray();
+        
+        for (Message msg : sentMessages) {
+            JSONObject jsonMsg = new JSONObject();
+            jsonMsg.put("messageID", msg.messageID);
+            jsonMsg.put("messageHash", msg.messageHash);
+            jsonMsg.put("recipient", msg.recipient);
+            jsonMsg.put("message", msg.message);
+            jsonArray.put(jsonMsg);
+        }
+        
+        try (FileWriter file = new FileWriter(filename)) {
+            file.write(jsonArray.toString(4)); // Pretty print with indentation
+            System.out.println("Messages stored successfully in " + filename);
+        } catch (IOException e) {
+            System.out.println("Error storing messages: " + e.getMessage());
+        }
+    }
 
+/*================addSentMessage()================
+ * Adds a message to the sent messages list and increments a counter
+*/
+    public void addSentMessage(Message msg) {
+        sentMessages.add(msg);
+        numMessagesSent++;
+    }
 
-
+/*================displayMessageDetails()================
+ * Displays full details of the message
+*/
+    public String displayMessageDetails() {
+        return "Message ID: " + messageID + "\n" +
+               "Message Hash: " + messageHash + "\n" +
+               "Recipient: " + recipient + "\n" +
+               "Message: " + message;
+    }
+    
+    // Getters
+    public String getMessageID() { return messageID; }
+    public String getRecipient() { return recipient; }
+    public String getMessage() { return message; }
+    public String getMessageHash() { return messageHash; }
 }
