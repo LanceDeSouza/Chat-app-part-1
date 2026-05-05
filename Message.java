@@ -107,5 +107,35 @@ public class Message {
         }
     }
 
+/*================printMessages()================
+ * Returns all the messages that the user sent while the program is still running
+*/
+    public String printMessages() {
+        if (sentMessages.isEmpty()) {
+            return "No messages sent yet.";
+        }
+        
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n========== All Sent Messages ==========\n");
+        for (Message msg : sentMessages) {
+            sb.append("Message ID: ").append(msg.messageID).append("\n");
+            sb.append("Message Hash: ").append(msg.messageHash).append("\n");
+            sb.append("Recipient: ").append(msg.recipient).append("\n");
+            sb.append("Message: ").append(msg.message).append("\n");
+            sb.append("----------------------------------------\n");
+        }
+        return sb.toString();
+    }
+
+/*================returnTotalMessagess()================
+ * Returns the total number of messages that were sent by the user
+*/
+    public int returnTotalMessagess() {
+        return numMessagesSent;
+    }
+
+
+
+
 
 }
