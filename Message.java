@@ -77,8 +77,35 @@ public class Message {
         }
     }
 
+/*================createMessageHash()================
+ * Creates and returns the Message Hash
+ * It formats the first two numbers of message ID + colon + message number + colon + first and last words in caps (00:0:HELLO WORLD)
+*/
+    public String createMessageHash(String messageID, int messageNum, String messageText) {
+        String firstTwoNums = messageID.substring(0, 2);
+        String[] words = messageText.trim().split("\\s+");
+        String firstWord = words[0].toUpperCase();
+        String lastWord = words[words.length - 1].toUpperCase();
+        
+        return firstTwoNums + ":" + messageNum + ":" + firstWord + lastWord;
+    }
 
-
+/*================SentMessage()================
+ * Allows the user to choose if they want to send the message, store or delete the message
+ * It also returns appropriate status message
+*/
+    public String SentMessage(int choice) {
+        switch(choice) {
+            case 1:
+                return "Message successfully sent.";
+            case 2:
+                return "Press 0 to delete the message.";
+            case 3:
+                return "Message successfully stored.";
+            default:
+                return "Invalid choice.";
+        }
+    }
 
 
 }
