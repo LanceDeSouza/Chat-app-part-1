@@ -70,9 +70,120 @@ public class Main {
 //If the login is successful then the user will be logged in and the loop will end
 		if (loginSuccessfull) {
 			loggedIn = true;
-		}
-			
+		}		
 	}
+
+//============QuickChat Menu (Only accessible after login)============
+ 		Message messageSystem = new Message();
+        System.out.println("\nWelcome to QuickChat.");
+        
+        // Ask how many messages the user wants to send
+        System.out.print("\nHow many messages would you like to send? ");
+        int numMessages = userInput.nextInt();
+        userInput.nextLine(); // Consume newline
+        
+        int messagesProcessed = 0;
+        boolean quit = false;
+        
+        while (messagesProcessed < numMessages && !quit) {
+            System.out.println("\n========== QuickChat Menu ==========");
+            System.out.println("1) Send Messages");
+            System.out.println("2) Show recently sent messages - Coming Soon.");
+            System.out.println("3) Quit");
+            System.out.print("\nSelect an option (1-3): ");
+            
+            int choice = userInput.nextInt();
+            userInput.nextLine(); // Consume newline
+            
+            switch (choice) {
+                case 1: // Send Message
+                    System.out.println("\n--- Message " + (messagesProcessed + 1) + " of " + numMessages + " ---");
+                    
+                    // Generate Message ID
+                    String msgID = messageSystem.generateMessageID();
+                    System.out.println("Message ID generated: " + msgID);
+                    
+                    // Get recipient
+                    System.out.print("Enter recipient cell number: ");
+                    String recipient = userInput.nextLine();
+                    
+                    // Validate recipient
+                    String cellCheck = messageSystem.checkRecipientCell(recipient);
+                    System.out.println(cellCheck);
+                    
+                    if (!cellCheck.contains("successfully")) {
+                        System.out.println("Please try again with a valid number.");
+                        break;
+                    }
+                    
+                    // Get message
+                    System.out.print("Enter your message (max 250 chars): ");
+                    String msgText = userInput.nextLine();
+                    
+                    // Check message length
+                    String lengthCheck = messageSystem.checkMessageLength(msgText);
+                    System.out.println(lengthCheck);
+                    
+                    if (!lengthCheck.contains("ready")) {
+                        System.out.println("Please try again with a shorter message.");
+                        break;
+                    }
+                    
+                    // Create message hash
+                    String msgHash = messageSystem.createMessageHash(msgID, messagesProcessed + 1, msgText);
+                    System.out.println("Message Hash: " + msgHash);
+                    
+                    // Create message object
+                    Message currentMsg = new Message(msgID, recipient, msgText, msgHash);
+                    
+                    // Send/Store/Disregard options
+                    System.out.println("\nWhat would you like to do?");
+                    System.out.println("1) Send Message");
+                    System.out.println("2) Disregard Message");
+                    System.out.println("3) Store Message to send later");
+                    System.out.print("Select option (1-3): ");
+                    
+                    int action = userInput.nextInt();
+                    userInput.nextLine(); // Consume newline
+                    
+                    String result = messageSystem.SentMessage(action);
+                    System.out.println(result);
+                    
+                    if (action == 1) { // Send
+                        messageSystem.addSentMessage(currentMsg);
+                        System.out.println("\n" + currentMsg.displayMessageDetails());
+                        messagesProcessed++;
+                    } else if (action == 2) { // Disregard
+                        System.out.println("Message deleted.");
+                        messagesProcessed++;
+                    } else if (action == 3) { // Store
+                        messageSystem.addSentMessage(currentMsg);
+                        System.out.println("Message stored for later.");
+                        messagesProcessed++;
+                    }
+                    break;
+                    
+                case 2: // Show recent messages
+                    System.out.println("Coming Soon.");
+                    break;
+                    
+                case 3: // Quit
+                    quit = true;
+                    System.out.println("Thank you for using QuickChat. Goodbye!");
+                    break;
+                    
+                default:
+                    System.out.println("Invalid option. Please try again.");
+            }
+        }
+        
+        // Display all sent messages summary
+        System.out.println("\n" + messageSystem.printMessages());
+        System.out.println("Total messages sent: " + messageSystem.returnTotalMessagess());
+        
+        // Store messages to JSON file
+        messageSystem.storeMessage("messages.json");
+
 //Close the scanner
 	userInput.close();
 	}
