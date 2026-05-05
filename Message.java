@@ -45,7 +45,7 @@ public class Message {
 /*================checkMessageID()================
  * Ensures that the messageID has a max of ten characters
 */
-    private boolean checkMessageID(String id) {
+    public boolean checkMessageID(String id) {
         return id != null && id.length() <= 10;
     }
 
