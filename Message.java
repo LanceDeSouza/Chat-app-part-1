@@ -16,18 +16,30 @@ import java.io.IOException;
  * - Validating message content and recipient information
 */
 
-public class Massage {
+public class Message {
+
     private String messageID;
     private String recipient;
     private String message;
     private String messageHash;
     private int numMessagesSent;
     private List<Message> sentMessages;
+    private static final int MAX_MESSAGE_LENGTH = 250;
+
 
 //Empty constructor
-    public Massage() {
+    public Message() {
         this.sentMessages = new ArrayList<>();
         this.numMessagesSent = 0;
  }
+
+//Constructor with parameters
+    public Message(String messageID, String message, String recipient, String messageHash) {
+        this.messageID = messageID;
+        this.message = message;
+        this.recipient = recipient;
+        this.messageHash = messageHash;
+        this.numMessagesSent = 0;
+    }
 
 }
